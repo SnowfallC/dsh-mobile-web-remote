@@ -66,3 +66,16 @@ test('管理页与配对页跟随 DSH 英文设置', () => {
   assert.match(pairing, />Connecting…</u)
   assert.doesNotMatch(management, />重新生成</u)
 })
+
+test('配对成功后显示完成状态而不是持续准备二维码', () => {
+  const html = managementPage({
+    publicUrl: 'https://example.test',
+    pairingUrl: undefined,
+    paired: true,
+    expiresAt: Date.now() + 60_000,
+    qrSvg: '',
+  })
+  assert.match(html, />已连接</u)
+  assert.match(html, />已完成一次性配对</u)
+  assert.doesNotMatch(html, />正在准备二维码…</u)
+})

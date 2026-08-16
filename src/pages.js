@@ -96,10 +96,10 @@ export function managementPage({ publicUrl, pairingUrl, paired, revoked = false,
         : copy.waitingScan
   const qrBlock = revoked
     ? `<div class="placeholder">${copy.revokedMessage}</div>`
-    : pairingUrl === undefined
-      ? `<div class="placeholder">${copy.preparingQr}</div>`
     : paired
       ? `<div class="placeholder success">${copy.pairedMessage}</div>`
+    : pairingUrl === undefined
+      ? `<div class="placeholder">${copy.preparingQr}</div>`
       : `<div class="qr">${qrSvg}</div>`
   const refreshMeta = publicUrl === undefined && error === undefined
     ? '<meta http-equiv="refresh" content="2">'
