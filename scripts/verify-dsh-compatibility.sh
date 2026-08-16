@@ -10,6 +10,7 @@ logFile="${runtimeRoot}/dsh-web.log"
 cookieFile="${runtimeRoot}/cookies.txt"
 fakeCloudflared="${pluginRoot}/scripts/fixtures/fake-cloudflared.mjs"
 dshPort="${DSH_COMPAT_PORT:-3080}"
+bridgePort="${DSH_COMPAT_BRIDGE_PORT:-31888}"
 dshPid=""
 
 mkdir -p "${runtimeRoot}" "${DSH_HOME:?DSH_HOME must be set}"
@@ -40,25 +41,30 @@ trap cleanup EXIT
   pnpm dsh plugin --profile web add "${pluginRoot}"
 )
 
+# 固定隔离测试的桥接端口，避免从 DSH 日志猜测随机监听端口。
+printf '%s\n' \
+  '- id: mobile-web-remote' \
+  '  config:' \
+  "    bridgePort: ${bridgePort}" \
+  >"${DSH_HOME}/profiles/web/cordis.patch.yml"
+
 (
   cd "${dshRoot}"
   DSH_CLOUDFLARED_PATH="${fakeCloudflared}" pnpm dsh web --port "${dshPort}"
 ) >"${logFile}" 2>&1 &
 dshPid="$!"
 
-bridgeUrl=""
+bridgeUrl="http://127.0.0.1:${bridgePort}"
 pairingToken=""
 for _ in $(seq 1 120); do
   kill -0 "${dshPid}" 2>/dev/null || fail "DSH Web 进程提前退出"
-  bridgeUrl="$(grep -Eo 'http://127\.0\.0\.1:[0-9]+' "${logFile}" 2>/dev/null | tail -n 1 || true)"
   pairingToken="$(grep -Eo 'https://compatibility-check\.trycloudflare\.com/#token=[A-Za-z0-9_-]+' "${logFile}" 2>/dev/null | tail -n 1 | sed 's/.*#token=//' || true)"
-  if [[ -n "${bridgeUrl}" && -n "${pairingToken}" ]]; then
+  if [[ -n "${pairingToken}" ]]; then
     break
   fi
   sleep 1
 done
 
-[[ -n "${bridgeUrl}" ]] || fail "未发现本地移动桥接地址"
 [[ -n "${pairingToken}" ]] || fail "未生成一次性配对令牌"
 
 desktopHtml="$(curl --fail --silent --show-error "http://127.0.0.1:${dshPort}/")" || fail "无法访问 DSH Web 首页"
