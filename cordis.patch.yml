@@ -1,6 +1,6 @@
-# 手机远程控制插件：本地页面保持 DSH 原生组合，远程桥接单独注入目录浏览器。
+# DSH Mobile Web Remote：保留本地原生界面，通过受保护桥接提供手机网页访问。
 - insert:
-    - id: mobile-cloudflare
+    - id: mobile-web-remote
       name: dsh-mobile-web-remote
       config:
         cloudflaredPath: cloudflared

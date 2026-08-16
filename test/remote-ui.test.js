@@ -6,7 +6,7 @@ test('远程限制脚本只注入桥接页面一次', () => {
   const original = '<html><head></head><body><div id="root"></div></body></html>'
   const once = injectRemoteMobileRestrictions(original)
   const twice = injectRemoteMobileRestrictions(once)
-  assert.match(once, /name="dsh-mobile-remote"/u)
+  assert.match(once, /name="dsh-mobile-web-remote"/u)
   assert.match(once, /data-dsh-mobile-restrictions/u)
   assert.equal(twice, once)
 })

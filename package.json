@@ -1,7 +1,7 @@
 {
   "name": "dsh-mobile-web-remote",
   "version": "0.1.0",
-  "description": "Non-invasive mobile remote access for DeepSeek Harness through one-time pairing and Cloudflare Quick Tunnel",
+  "description": "Scan-to-connect, app-free mobile web remote access for DeepSeek Harness",
   "author": "SnowfallC",
   "homepage": "https://github.com/SnowfallC/dsh-mobile-web-remote#readme",
   "repository": {

@@ -5,7 +5,7 @@ import { startMobileBridge } from './src/mobile-bridge.js'
 import { injectMobileControlButton, managementPage } from './src/pages.js'
 import { readDshLocale, readDshThemePreference } from './src/theme.js'
 
-export const name = 'mobile-cloudflare'
+export const name = 'mobile-web-remote'
 export const inject = ['webServer']
 
 const controlPath = '/__dsh_mobile'
@@ -113,9 +113,9 @@ export function apply(ctx, config = {}) {
       })
       res.end(req.method === 'HEAD' ? undefined : html)
     },
-  }), 'mobile-cloudflare: 管理页面')
+  }), 'mobile-web-remote: 管理页面')
 
-  ctx.effect(() => ctx.webServer.tapIndex(injectMobileControlButton), 'mobile-cloudflare: 本地悬浮入口')
+  ctx.effect(() => ctx.webServer.tapIndex(injectMobileControlButton), 'mobile-web-remote: 本地悬浮入口')
 
   const startup = (async () => {
     try {
@@ -166,5 +166,5 @@ export function apply(ctx, config = {}) {
     await startup
     await stopCloudflared(runtime.cloudflared)
     await runtime.bridge?.close()
-  }, 'mobile-cloudflare: 释放桥接与隧道')
+  }, 'mobile-web-remote: 释放桥接与隧道')
 }
