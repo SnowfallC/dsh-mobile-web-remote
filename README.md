@@ -2,13 +2,13 @@
 
 # DSH Mobile Web Remote
 
-**扫码即用，无需安装手机 App。**
+**扫码即用，无需安装手机 App，也无需自备服务器或公网 IP。**
 
 [![Compatibility CI](https://github.com/SnowfallC/dsh-mobile-web-remote/actions/workflows/compatibility.yml/badge.svg)](https://github.com/SnowfallC/dsh-mobile-web-remote/actions/workflows/compatibility.yml)
 
 [English](README.en.md) · [安装指南](#安装) · [DSHFind](https://dshfind.com/)
 
-DSH Mobile Web Remote 是面向 DeepSeek Harness（DSH）Web profile 的非侵入式远程访问插件。它在本机建立带鉴权的移动桥接服务，再通过 Cloudflare Quick Tunnel 提供临时 HTTPS 入口。手机端无需安装 APK，扫描电脑端二维码即可继续使用 DSH 原生会话界面。
+DSH Mobile Web Remote 是面向 DeepSeek Harness（DSH）Web profile 的非侵入式远程访问插件。它在本机建立带鉴权的移动桥接服务，再通过 Cloudflare Quick Tunnel 提供临时 HTTPS 入口。无需准备 VPS、域名、公网 IP，也不用在路由器上配置端口映射。手机端无需安装 APK，扫描电脑端二维码即可继续使用 DSH 原生会话界面。
 
 > [!WARNING]
 > 本项目属于实验性功能。Quick Tunnel 的流量由 Cloudflare 中转，临时域名也不具备长期稳定性。请勿处理密钥、客户数据等敏感任务；使用后应立即撤销链接。长期运行时，建议改用可审计的 Named Tunnel，并继续保留本插件的鉴权层。
@@ -58,6 +58,8 @@ flowchart LR
 - 已安装 Node.js 与 pnpm（从 DSH 源码运行时通常已经具备）。
 
 无需手工安装 `cloudflared`。插件优先使用 `PATH` 中已有的版本；如果不存在，则自动下载并校验 Cloudflare 官方发布文件。首次运行需要访问 GitHub Releases，后续会使用本地缓存。
+
+无需自备服务器、域名或公网 IP。插件启动时，Cloudflare Quick Tunnel 会分配一个临时 HTTPS 地址，二维码中包含该地址和一次性配对信息。
 
 ### 从 GitHub 安装
 

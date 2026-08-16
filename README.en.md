@@ -2,13 +2,13 @@
 
 # DSH Mobile Web Remote
 
-**Scan to connect—no mobile app required.**
+**Scan to connect. No mobile app, server, or public IP required.**
 
 [![Compatibility CI](https://github.com/SnowfallC/dsh-mobile-web-remote/actions/workflows/compatibility.yml/badge.svg)](https://github.com/SnowfallC/dsh-mobile-web-remote/actions/workflows/compatibility.yml)
 
 [简体中文](README.md) · [Installation](#installation) · [DSHFind](https://dshfind.com/)
 
-DSH Mobile Web Remote adds temporary, authenticated mobile access to the DeepSeek Harness (DSH) web profile. It runs a small bridge on your computer and publishes that bridge through a Cloudflare Quick Tunnel. There is no Android app to install: scan the QR code and continue in the native DSH web interface.
+DSH Mobile Web Remote adds temporary, authenticated mobile access to the DeepSeek Harness (DSH) web profile. It runs a small bridge on your computer and publishes that bridge through a Cloudflare Quick Tunnel. You do not need a VPS, domain, public IP, or router port forwarding. There is no Android app to install: scan the QR code and continue in the native DSH web interface.
 
 > [!WARNING]
 > This is an experimental feature. Cloudflare relays the traffic, and Quick Tunnel URLs are temporary. Do not use it for secrets, customer data, or other sensitive work. Revoke the link when you are done. For persistent deployments, use an auditable Named Tunnel and keep the plugin's authentication layer in place.
@@ -58,6 +58,8 @@ After pairing, the phone renders the same DSH interface. **Add workspace** and t
 - Node.js and pnpm, normally already present when running DSH from source.
 
 You do not need to install `cloudflared` manually. The plugin uses an existing copy from `PATH` when available. Otherwise, it downloads and verifies an official Cloudflare release on first run, then reuses the local cache. The first run therefore needs access to GitHub Releases.
+
+You do not need to provide a server, domain, or public IP. Cloudflare Quick Tunnel assigns a temporary HTTPS address at startup, and the plugin places that address and the one-time pairing data in the QR code.
 
 ### Install from GitHub
 
