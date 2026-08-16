@@ -1,0 +1,48 @@
+{
+  "name": "dsh-mobile-cloudflare",
+  "version": "0.1.0",
+  "description": "Non-invasive mobile remote access for DeepSeek Harness through one-time pairing and Cloudflare Quick Tunnel",
+  "author": "SnowfallC",
+  "homepage": "https://github.com/SnowfallC/dsh-mobile-cloudflare#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SnowfallC/dsh-mobile-cloudflare.git"
+  },
+  "bugs": {
+    "url": "https://github.com/SnowfallC/dsh-mobile-cloudflare/issues"
+  },
+  "type": "module",
+  "main": "index.js",
+  "exports": {
+    ".": "./index.js"
+  },
+  "files": [
+    "index.js",
+    "src/**/*.js",
+    "cordis.patch.yml",
+    "README.md",
+    "README.en.md",
+    "LICENSE",
+    "ASSET_LICENSE.md"
+  ],
+  "scripts": {
+    "test": "node --test",
+    "check": "node --check index.js && node --check src/auth.js && node --check src/cloudflared.js && node --check src/directory-browser.js && node --check src/drive-shortcuts.js && node --check src/mobile-bridge.js && node --check src/pages.js && node --check src/remote-ui.js && node --check src/theme.js"
+  },
+  "keywords": [
+    "deepseek-harness",
+    "dsh-plugin",
+    "mobile",
+    "cloudflare-tunnel"
+  ],
+  "license": "MIT",
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "dependencies": {
+    "http-proxy": "^1.18.1",
+    "qrcode": "^1.5.4"
+  }
+}

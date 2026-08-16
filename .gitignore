@@ -1,0 +1,12 @@
+node_modules/
+.DS_Store
+Thumbs.db
+*.log
+.tmp-*
+
+# 本地设计草稿与验收临时文件
+design-directions/
+direction-approved.md
+adaptive-mobile-remote.png
+adaptive-mobile-remote-final.png
+final-mobile-modal.png
