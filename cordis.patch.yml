@@ -3,7 +3,7 @@
     - id: mobile-web-remote
       name: dsh-mobile-web-remote
       config:
-        cloudflaredPath: cloudflared
+        cloudflaredPath: auto
         pairingTtlMinutes: 15
         sessionTtlHours: 12
         bridgePort: 0

@@ -1,6 +1,7 @@
 import QRCode from 'qrcode'
 import { createAuthState } from './src/auth.js'
 import { startCloudflared, stopCloudflared } from './src/cloudflared.js'
+import { resolveCloudflaredExecutable } from './src/cloudflared-install.js'
 import { startMobileBridge } from './src/mobile-bridge.js'
 import { injectMobileControlButton, managementPage } from './src/pages.js'
 import { readDshLocale, readDshThemePreference } from './src/theme.js'
@@ -135,8 +136,12 @@ export function apply(ctx, config = {}) {
       }
       const localUrl = `http://127.0.0.1:${String(runtime.bridge.port)}`
       ctx.logger.info(`手机桥接已监听 ${localUrl}`)
+      const cloudflaredExecutable = await resolveCloudflaredExecutable({
+        configuredPath: config.cloudflaredPath,
+      })
+      ctx.logger.info(`Cloudflared 可执行文件：${cloudflaredExecutable}`)
       runtime.cloudflared = startCloudflared({
-        executable: config.cloudflaredPath ?? process.env.DSH_CLOUDFLARED_PATH ?? 'cloudflared',
+        executable: cloudflaredExecutable,
         localUrl,
         onPublicUrl(publicUrl) {
           runtime.publicUrl = publicUrl

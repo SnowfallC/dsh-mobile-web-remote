@@ -15,6 +15,10 @@ DSH Mobile Web Remote adds temporary, authenticated mobile access to the DeepSee
 
 The plugin does not patch DSH source files, build artifacts, or the native workspace picker. It mounts through DSH's plugin composition, `webServer` routes, and `tapIndex` extension point. The desktop page gets one floating button; the phone receives the existing DSH web application through the protected bridge. Remove the plugin and restart DSH, and those additions disappear.
 
+### Why it reuses the DSH web interface
+
+DSH already runs as a web application. Its official interface defines sessions, message flow, tool state, language, and appearance. The remote plugin therefore delivers that same application to the phone through a protected bridge instead of maintaining a second client. This avoids UI drift and lets the mobile experience inherit official DSH interface and feature updates. The plugin remains responsible only for pairing, authentication, transport, and the few restrictions needed on a remote phone.
+
 ```mermaid
 flowchart LR
   P[Phone browser] -->|HTTPS / WebSocket| C[Cloudflare Quick Tunnel]
@@ -26,8 +30,9 @@ flowchart LR
 - A successful pairing creates an `HttpOnly`, `SameSite=Strict` session cookie.
 - HTTP and WebSocket traffic pass through the same authentication boundary. Forwarded Host and Origin values are restored for DSH's own browser checks.
 - The bridge port and `cloudflared` process are stopped when DSH exits or unloads the plugin.
+- If `cloudflared` is not installed, the plugin downloads the pinned official build for the current platform, verifies its SHA-256 digest, and caches it.
 - The floating entry, dialog, and remote page follow DSH's language and light/dark appearance.
-- “Add workspace” and “Settings” are hidden remotely. Create or select a workspace on the computer before opening it from your phone.
+- “Add workspace” and “Settings” remain in their native positions but appear disabled on the remote page. Complete host configuration on the computer before continuing from the phone.
 
 ## Screenshots
 
@@ -37,13 +42,18 @@ The control stays inside the original DSH page instead of opening another tab:
 
 <p align="center"><img src="docs/assets/dsh-floating-entry.png" alt="Floating Mobile remote entry in DSH" width="760"></p>
 
+After pairing, the phone renders the same DSH interface. **Add workspace** and the settings gear stay in their native positions but are visibly disabled:
+
+<p align="center"><img src="docs/assets/mobile-dsh-interface.png" alt="Native DSH interface in a phone browser" width="390"></p>
+
 ## Installation
 
 ### Requirements
 
 - A working DSH web profile.
 - Node.js and pnpm, normally already present when running DSH from source.
-- [`cloudflared`](https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/downloads/) available on `PATH`, or an explicit `cloudflaredPath` in the plugin configuration.
+
+You do not need to install `cloudflared` manually. The plugin uses an existing copy from `PATH` when available. Otherwise, it downloads and verifies an official Cloudflare release on first run, then reuses the local cache. The first run therefore needs access to GitHub Releases.
 
 ### Install from GitHub
 
@@ -79,13 +89,13 @@ Defaults live in `cordis.patch.yml`:
 
 ```yaml
 config:
-  cloudflaredPath: cloudflared
+  cloudflaredPath: auto
   pairingTtlMinutes: 15
   sessionTtlHours: 12
   bridgePort: 0
 ```
 
-With `bridgePort: 0`, the operating system chooses an unused local port. You can also set `DSH_CLOUDFLARED_PATH` to point at the executable.
+With `bridgePort: 0`, the operating system chooses an unused local port. `cloudflaredPath: auto` checks the system command before installing the verified pinned build. Downloads are cached under `$DSH_HOME/cache/dsh-mobile-web-remote/cloudflared`. Set `cloudflaredPath` or `DSH_CLOUDFLARED_PATH` to use a specific executable instead.
 
 ## Uninstall
 
@@ -109,4 +119,4 @@ pnpm test
 
 ## License
 
-The code is released under the [MIT License](LICENSE). The hero is an AI-assisted derivative of a community character and is excluded from the MIT grant; see [ASSET_LICENSE.md](ASSET_LICENSE.md).
+The code is released under the [MIT License](LICENSE). The [`cloudflared`](https://github.com/cloudflare/cloudflared) executable downloaded at runtime is published by Cloudflare under Apache-2.0 and is not part of this repository's MIT grant. The hero is an AI-assisted derivative of a community character and is also excluded; see [ASSET_LICENSE.md](ASSET_LICENSE.md).

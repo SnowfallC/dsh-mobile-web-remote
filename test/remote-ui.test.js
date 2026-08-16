@@ -11,10 +11,14 @@ test('远程限制脚本只注入桥接页面一次', () => {
   assert.equal(twice, once)
 })
 
-test('远程限制脚本隐藏添加工作区与设置入口', () => {
+test('远程限制脚本保留并禁用添加工作区与设置入口', () => {
   const html = injectRemoteMobileRestrictions('<html><head></head><body></body></html>')
   assert.match(html, /添加工作区/u)
   assert.match(html, /设置/u)
+  assert.match(html, /data-slot="settings\.trigger"/u)
+  assert.match(html, /data-dsh-mobile-disabled/u)
+  assert.match(html, /aria-disabled/u)
+  assert.match(html, /pointer-events/u)
   assert.match(html, /MutationObserver/u)
   assert.doesNotMatch(html, /workspace\.create/u)
   assert.doesNotMatch(html, /fs\/list/u)
