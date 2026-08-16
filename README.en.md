@@ -4,6 +4,8 @@
 
 **Scan to connect—no mobile app required.**
 
+[![Compatibility CI](https://github.com/SnowfallC/dsh-mobile-web-remote/actions/workflows/compatibility.yml/badge.svg)](https://github.com/SnowfallC/dsh-mobile-web-remote/actions/workflows/compatibility.yml)
+
 [简体中文](README.md) · [Installation](#installation) · [DSHFind](https://dshfind.com/)
 
 DSH Mobile Web Remote adds temporary, authenticated mobile access to the DeepSeek Harness (DSH) web profile. It runs a small bridge on your computer and publishes that bridge through a Cloudflare Quick Tunnel. There is no Android app to install: scan the QR code and continue in the native DSH web interface.
@@ -18,6 +20,8 @@ The plugin does not patch DSH source files, build artifacts, or the native works
 ### Why it reuses the DSH web interface
 
 DSH already runs as a web application. Its official interface defines sessions, message flow, tool state, language, and appearance. The remote plugin therefore delivers that same application to the phone through a protected bridge instead of maintaining a second client. This avoids UI drift and lets the mobile experience inherit official DSH interface and feature updates. The plugin remains responsible only for pairing, authentication, transport, and the few restrictions needed on a remote phone.
+
+A compatibility workflow checks the latest DSH `main` every week. It installs the plugin into a real Web profile, then verifies desktop injection, the management page, one-time pairing, the session cookie, and remote restrictions. The workflow uses a local tunnel stand-in and never creates a public CI endpoint. If DSH changes its plugin manifest, Web extension points, or index delivery, the check should expose the small adapter surface that needs attention.
 
 ```mermaid
 flowchart LR

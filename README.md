@@ -4,6 +4,8 @@
 
 **扫码即用，无需安装手机 App。**
 
+[![Compatibility CI](https://github.com/SnowfallC/dsh-mobile-web-remote/actions/workflows/compatibility.yml/badge.svg)](https://github.com/SnowfallC/dsh-mobile-web-remote/actions/workflows/compatibility.yml)
+
 [English](README.en.md) · [安装指南](#安装) · [DSHFind](https://dshfind.com/)
 
 DSH Mobile Web Remote 是面向 DeepSeek Harness（DSH）Web profile 的非侵入式远程访问插件。它在本机建立带鉴权的移动桥接服务，再通过 Cloudflare Quick Tunnel 提供临时 HTTPS 入口。手机端无需安装 APK，扫描电脑端二维码即可继续使用 DSH 原生会话界面。
@@ -18,6 +20,8 @@ DSH Mobile Web Remote 是面向 DeepSeek Harness（DSH）Web profile 的非侵�
 ### 为何复用 DSH Web 界面
 
 DSH 本身就在 Web 环境中运行，其官方界面已经定义了会话、消息流、工具状态、语言与主题等交互。手机远程访问因此没有另造一套客户端，而是将同一 Web 应用通过受保护桥接交付给手机浏览器。该结构既减少了界面分叉，也使移动端能够随 DSH 官方界面和功能更新一同演进；插件只负责配对、鉴权、转发与手机端必要的权限收敛。
+
+仓库通过兼容性 CI 每周拉取最新 DSH `main`，真实安装插件并验证桌面入口、管理页、一次性配对、会话 Cookie 与远程限制注入。检查使用本地假隧道，不会在 CI 中创建公网入口。DSH 若调整插件清单、Web 扩展点或首页交付方式，CI 会尽早暴露需要更新的薄适配层。
 
 ```mermaid
 flowchart LR
