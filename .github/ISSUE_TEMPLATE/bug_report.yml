@@ -1,0 +1,67 @@
+name: "Bug report / 缺陷报告"
+description: "Report a reproducible problem in DSH Mobile Web Remote / 报告可复现的问题"
+title: "[Bug]: "
+labels:
+  - "bug"
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping improve the plugin. Remove pairing URLs, tokens, cookies, API keys, and private workspace data before submitting.
+
+        感谢协助改进插件。提交前请移除配对链接、Token、Cookie、API Key 与私人工作区数据。
+  - type: input
+    id: dsh-version
+    attributes:
+      label: "DSH version / DSH 版本"
+      placeholder: "Example: commit SHA or release version"
+    validations:
+      required: true
+  - type: dropdown
+    id: operating-system
+    attributes:
+      label: "Operating system / 操作系统"
+      options:
+        - "Windows"
+        - "Linux / WSL"
+        - "macOS"
+        - "Other / 其他"
+    validations:
+      required: true
+  - type: input
+    id: browser
+    attributes:
+      label: "Phone and browser / 手机与浏览器"
+      placeholder: "Example: Android 16, Chrome 140"
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: "Problem / 问题描述"
+      description: "Describe what happened and what you expected. / 描述实际结果与预期结果。"
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: "Reproduction steps / 复现步骤"
+      placeholder: |
+        1. Start DSH...
+        2. Open Mobile remote...
+        3. Scan the QR code...
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: "Sanitized logs / 已脱敏日志"
+      description: "Do not include pairing URLs, tokens, cookies, API keys, or sensitive workspace content. / 不要包含配对链接、Token、Cookie、API Key 或敏感工作区内容。"
+      render: shell
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: "Safety check / 安全检查"
+      options:
+        - label: "I removed secrets and personal data from this report. / 我已移除报告中的密钥与个人数据。"
+          required: true

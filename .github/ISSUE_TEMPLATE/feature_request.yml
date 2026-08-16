@@ -1,0 +1,32 @@
+name: "Feature request / 功能建议"
+description: "Suggest a focused improvement / 提出范围明确的改进建议"
+title: "[Feature]: "
+labels:
+  - "enhancement"
+body:
+  - type: textarea
+    id: use-case
+    attributes:
+      label: "Use case / 使用场景"
+      description: "What are you trying to accomplish from the phone? / 你希望在手机端完成什么任务？"
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: "Proposed behavior / 建议行为"
+      description: "Describe the smallest change that would solve the problem. / 描述能够解决问题的最小改动。"
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: "Alternatives / 替代方案"
+      description: "List any workarounds or alternatives you considered. / 列出已经尝试的替代方法。"
+  - type: checkboxes
+    id: boundaries
+    attributes:
+      label: "Project boundaries / 项目边界"
+      options:
+        - label: "This proposal keeps the plugin non-invasive and does not require patching DSH core. / 该建议保持插件非侵入式，不要求修改 DSH 内核。"
+          required: true

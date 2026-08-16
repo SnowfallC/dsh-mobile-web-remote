@@ -117,6 +117,8 @@ pnpm test
 
 - [DSHFind — an index of the DSH ecosystem](https://dshfind.com/)
 
+Report security issues privately as described in [SECURITY.md](SECURITY.md). Do not place pairing URLs, tokens, or workspace data in a public issue.
+
 ## License
 
 The code is released under the [MIT License](LICENSE). The [`cloudflared`](https://github.com/cloudflare/cloudflared) executable downloaded at runtime is published by Cloudflare under Apache-2.0 and is not part of this repository's MIT grant. The hero is an AI-assisted derivative of a community character and is also excluded; see [ASSET_LICENSE.md](ASSET_LICENSE.md).

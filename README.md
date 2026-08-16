@@ -117,6 +117,8 @@ pnpm test
 
 - [DSHFind — DSH 生态项目索引](https://dshfind.com/)
 
+安全问题请按 [SECURITY.md](SECURITY.md) 私下报告，不要在公开 Issue 中提交配对链接、Token 或工作区数据。
+
 ## 许可
 
 代码采用 [MIT License](LICENSE) 发布。运行时下载的 [`cloudflared`](https://github.com/cloudflare/cloudflared) 由 Cloudflare 以 Apache-2.0 许可发布，不属于本仓库的 MIT 授权。仓库头图属于社区角色的 AI 衍生创作，同样不纳入 MIT；详见 [ASSET_LICENSE.md](ASSET_LICENSE.md)。
