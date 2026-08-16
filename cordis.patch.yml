@@ -1,7 +1,7 @@
 # 手机远程控制插件：本地页面保持 DSH 原生组合，远程桥接单独注入目录浏览器。
 - insert:
     - id: mobile-cloudflare
-      name: dsh-mobile-cloudflare
+      name: dsh-mobile-web-remote
       config:
         cloudflaredPath: cloudflared
         pairingTtlMinutes: 15

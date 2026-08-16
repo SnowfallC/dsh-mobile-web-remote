@@ -1,10 +1,12 @@
-<p align="center"><img src="docs/assets/deepseek-mascot-hero.png" alt="DSH Mobile Remote hero" width="100%"></p>
+<p align="center"><img src="docs/assets/deepseek-mascot-hero.png" alt="DSH Mobile Web Remote hero" width="100%"></p>
 
-# DSH Mobile Remote
+# DSH Mobile Web Remote
+
+**Scan to connect—no mobile app required.**
 
 [简体中文](README.md) · [Installation](#installation) · [DSHFind](https://dshfind.com/)
 
-DSH Mobile Remote adds temporary, authenticated mobile access to the DeepSeek Harness (DSH) web profile. It runs a small bridge on your computer and publishes that bridge through a Cloudflare Quick Tunnel. There is no Android app to install: scan the QR code and continue in the native DSH web interface.
+DSH Mobile Web Remote adds temporary, authenticated mobile access to the DeepSeek Harness (DSH) web profile. It runs a small bridge on your computer and publishes that bridge through a Cloudflare Quick Tunnel. There is no Android app to install: scan the QR code and continue in the native DSH web interface.
 
 > [!WARNING]
 > This is an experimental feature. Cloudflare relays the traffic, and Quick Tunnel URLs are temporary. Do not use it for secrets, customer data, or other sensitive work. Revoke the link when you are done. For persistent deployments, use an auditable Named Tunnel and keep the plugin's authentication layer in place.
@@ -29,7 +31,7 @@ flowchart LR
 
 ## Screenshots
 
-<p align="center"><img src="docs/assets/mobile-remote-modal.png" alt="DSH Mobile Remote dialog in English" width="760"></p>
+<p align="center"><img src="docs/assets/mobile-remote-modal.png" alt="DSH Mobile Web Remote dialog in English" width="760"></p>
 
 The control stays inside the original DSH page instead of opening another tab:
 
@@ -48,16 +50,16 @@ The control stays inside the original DSH page instead of opening another tab:
 Run these commands from the DSH source repository:
 
 ```powershell
-pnpm dsh plugin --profile web add "github:SnowfallC/dsh-mobile-cloudflare"
+pnpm dsh plugin --profile web add "github:SnowfallC/dsh-mobile-web-remote"
 pnpm dsh web
 ```
 
 ### Install from a local checkout
 
 ```powershell
-git clone https://github.com/SnowfallC/dsh-mobile-cloudflare.git
+git clone https://github.com/SnowfallC/dsh-mobile-web-remote.git
 cd deepseek-harness
-pnpm dsh plugin --profile web add "C:/path/to/dsh-mobile-cloudflare"
+pnpm dsh plugin --profile web add "C:/path/to/dsh-mobile-web-remote"
 pnpm dsh web
 ```
 
@@ -88,7 +90,7 @@ With `bridgePort: 0`, the operating system chooses an unused local port. You can
 ## Uninstall
 
 ```powershell
-pnpm dsh plugin --profile web remove dsh-mobile-cloudflare
+pnpm dsh plugin --profile web remove dsh-mobile-web-remote
 ```
 
 Restart DSH afterward. No patch is left in the DSH core repository.

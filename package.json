@@ -1,15 +1,15 @@
 {
-  "name": "dsh-mobile-cloudflare",
+  "name": "dsh-mobile-web-remote",
   "version": "0.1.0",
   "description": "Non-invasive mobile remote access for DeepSeek Harness through one-time pairing and Cloudflare Quick Tunnel",
   "author": "SnowfallC",
-  "homepage": "https://github.com/SnowfallC/dsh-mobile-cloudflare#readme",
+  "homepage": "https://github.com/SnowfallC/dsh-mobile-web-remote#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/SnowfallC/dsh-mobile-cloudflare.git"
+    "url": "git+https://github.com/SnowfallC/dsh-mobile-web-remote.git"
   },
   "bugs": {
-    "url": "https://github.com/SnowfallC/dsh-mobile-cloudflare/issues"
+    "url": "https://github.com/SnowfallC/dsh-mobile-web-remote/issues"
   },
   "type": "module",
   "main": "index.js",

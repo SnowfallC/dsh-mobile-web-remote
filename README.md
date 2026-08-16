@@ -1,10 +1,12 @@
-<p align="center"><img src="docs/assets/deepseek-mascot-hero.png" alt="DSH Mobile Remote 头图" width="100%"></p>
+<p align="center"><img src="docs/assets/deepseek-mascot-hero.png" alt="DSH Mobile Web Remote 头图" width="100%"></p>
 
-# DSH Mobile Remote
+# DSH Mobile Web Remote
+
+**扫码即用，无需安装手机 App。**
 
 [English](README.en.md) · [安装指南](#安装) · [DSHFind](https://dshfind.com/)
 
-DSH Mobile Remote 是面向 DeepSeek Harness（DSH）Web profile 的非侵入式远程访问插件。它在本机建立带鉴权的移动桥接服务，再通过 Cloudflare Quick Tunnel 提供临时 HTTPS 入口。手机端无需安装 APK，扫描电脑端二维码即可继续使用 DSH 原生会话界面。
+DSH Mobile Web Remote 是面向 DeepSeek Harness（DSH）Web profile 的非侵入式远程访问插件。它在本机建立带鉴权的移动桥接服务，再通过 Cloudflare Quick Tunnel 提供临时 HTTPS 入口。手机端无需安装 APK，扫描电脑端二维码即可继续使用 DSH 原生会话界面。
 
 > [!WARNING]
 > 本项目属于实验性功能。Quick Tunnel 的流量由 Cloudflare 中转，临时域名也不具备长期稳定性。请勿处理密钥、客户数据等敏感任务；使用后应立即撤销链接。长期运行时，建议改用可审计的 Named Tunnel，并继续保留本插件的鉴权层。
@@ -29,7 +31,7 @@ flowchart LR
 
 ## 界面
 
-<p align="center"><img src="docs/assets/mobile-remote-modal.png" alt="DSH Mobile Remote 英文弹窗" width="760"></p>
+<p align="center"><img src="docs/assets/mobile-remote-modal.png" alt="DSH Mobile Web Remote 英文弹窗" width="760"></p>
 
 入口附着在原生 DSH 页面，不会打开额外标签页：
 
@@ -48,16 +50,16 @@ flowchart LR
 在 DSH 源码仓库中执行：
 
 ```powershell
-pnpm dsh plugin --profile web add "github:SnowfallC/dsh-mobile-cloudflare"
+pnpm dsh plugin --profile web add "github:SnowfallC/dsh-mobile-web-remote"
 pnpm dsh web
 ```
 
 ### 从本地目录安装
 
 ```powershell
-git clone https://github.com/SnowfallC/dsh-mobile-cloudflare.git
+git clone https://github.com/SnowfallC/dsh-mobile-web-remote.git
 cd deepseek-harness
-pnpm dsh plugin --profile web add "C:/path/to/dsh-mobile-cloudflare"
+pnpm dsh plugin --profile web add "C:/path/to/dsh-mobile-web-remote"
 pnpm dsh web
 ```
 
@@ -88,7 +90,7 @@ config:
 ## 卸载
 
 ```powershell
-pnpm dsh plugin --profile web remove dsh-mobile-cloudflare
+pnpm dsh plugin --profile web remove dsh-mobile-web-remote
 ```
 
 随后重启 DSH。插件不会在 DSH 内核仓库中留下补丁。
